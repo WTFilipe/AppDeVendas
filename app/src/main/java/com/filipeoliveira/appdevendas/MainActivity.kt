@@ -3,44 +3,42 @@ package com.filipeoliveira.appdevendas
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.filipeoliveira.appdevendas.ui.components.SalesBottomNavigation
+import com.filipeoliveira.appdevendas.ui.screens.home.HomeScreen
+import com.filipeoliveira.appdevendas.ui.screens.home.Screens
 import com.filipeoliveira.appdevendas.ui.theme.AppDeVendasTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             AppDeVendasTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
+                val navController = rememberNavController()
+
+                val screensInBottomNav = listOf(
+                    Screens.Home
+                )
+
+                Scaffold(
+                    bottomBar = { SalesBottomNavigation(navController, screensInBottomNav) }
+                ) { paddingValues ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screens.Home.route,
+                        modifier = Modifier.padding(paddingValues)
+                    ){
+                        composable(Screens.Home.route) { HomeScreen() }
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AppDeVendasTheme {
-        Greeting("Android")
     }
 }

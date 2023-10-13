@@ -4,8 +4,9 @@ import com.filipeoliveira.appdevendas.data.remote.model.ItemRemote
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.math.BigDecimal
+import javax.inject.Inject
 
-class SalesRemoteDataImpl() : SalesRemoteData {
+class SalesRemoteDataImpl @Inject constructor() : SalesRemoteData {
 
     override suspend fun getAvailableItemsList(): Flow<List<ItemRemote>> = flow {
         emit(fakeItemList)
