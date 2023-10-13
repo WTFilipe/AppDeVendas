@@ -5,8 +5,9 @@ import com.filipeoliveira.appdevendas.data.model.Item
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class GetAvailableItemListUseCaseImpl(
+class GetAvailableItemListUseCaseImpl @Inject constructor (
     private val salesRepository: SalesRepository
 ) : GetAvailableItemListUseCase{
     override suspend fun execute(): Flow<Result<List<Item>>> = flow {
