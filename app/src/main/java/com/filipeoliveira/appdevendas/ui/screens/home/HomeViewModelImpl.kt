@@ -81,27 +81,12 @@ class HomeViewModelImpl @Inject constructor(
     override fun getCart() {
         viewModelScope.launch(Dispatchers.IO) {
             getCartUseCase.execute()
-                .catch {
-                    _homeScreenModel.value = _homeScreenModel.value.copy(
-                        cartPrice = BigDecimal.ZERO,
-                        cartItemQuantity = 0L
-                    )
-                }
+                .catch {}
                 .collect { result ->
-                    when (result) {
-                        is Result.Success -> {
-                            _homeScreenModel.value = _homeScreenModel.value.copy(
-                                cartPrice = result.data.orderValue,
-                                cartItemQuantity = result.data.quantityOfItems
-                            )
-                        }
-
-                        is Result.Error -> {
-                            _homeScreenModel.value = _homeScreenModel.value.copy(
-                                cartPrice = BigDecimal.ZERO,
-                                cartItemQuantity = 0L
-                            )
-                        }
+                    if (result is Result.Success){
+                        _homeScreenModel.value = _homeScreenModel.value.copy(
+                            cart = result.data
+                        )
                     }
                 }
         }

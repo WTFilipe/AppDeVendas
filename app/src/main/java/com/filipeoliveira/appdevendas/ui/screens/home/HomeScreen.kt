@@ -49,7 +49,7 @@ private fun ScreenContent(
 
         if (uiState.availableAvailableItemList.isNotEmpty()) {
             OnAvailableItemsSuccess(
-                data = uiState.availableAvailableItemList,
+                data = uiState,
                 modifier = modifier
                     .fillMaxWidth()
                     .weight(1F),
@@ -59,10 +59,10 @@ private fun ScreenContent(
             )
         }
 
-        if (uiState.cartItemQuantity > 0){
+        if (uiState.cartSize > 0){
             CartResumeForHome(
-                uiState.cartItemQuantity,
-                uiState.cartPrice
+                uiState.cartSize,
+                uiState.cartValue
             )
         }
     }
@@ -70,7 +70,7 @@ private fun ScreenContent(
 
 @Composable
 fun OnAvailableItemsSuccess(
-    data: List<AvailableItem>,
+    data: HomeScreenModel,
     onAddToCart: (AvailableItem, Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -82,9 +82,10 @@ fun OnAvailableItemsSuccess(
         modifier = modifier,
         contentPadding = PaddingValues(dimen16Dp),
     ) {
-        items(data.size) {
+        val availableItems = data.availableAvailableItemList
+        items(availableItems.size) {
             ItemLayoutForList(
-                availableItem = data[it],
+                availableItem = availableItems[it],
                 onItemClicked = { item ->
                     showDetailDialog = item
                 },
@@ -97,12 +98,15 @@ fun OnAvailableItemsSuccess(
     }
 
     showDetailDialog?.let {
+        val alreadySelectedQuantity = data.getItemSelectedQuantity(it.sku)
+
         ItemDetailDialog(
             availableItem = it,
             onDismiss = { item, selectedQuantity ->
                 showDetailDialog = null
                 onAddToCart(item,  selectedQuantity)
-            }
+            },
+            selectedQuantity = alreadySelectedQuantity
         )
     }
 }
@@ -120,5 +124,7 @@ fun OnAvailableItemsSuccessPreview() {
             sku = "1234"
         )
     }
-    OnAvailableItemsSuccess(data = fakeList, onAddToCart = {_,_ -> })
+
+    val homeScreenModel = HomeScreenModel(availableAvailableItemList = fakeList)
+    OnAvailableItemsSuccess(data = homeScreenModel, onAddToCart = {_,_ -> })
 }

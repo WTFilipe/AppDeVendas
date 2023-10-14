@@ -12,7 +12,11 @@ class SalesLocalDataImpl @Inject constructor (
     override suspend fun getOrderWithItemsList(): Flow<List<OrderWithItemsDB>> = appDatabase.getOrderWithItemsDao().getOrdersWithItemsList()
     override suspend fun getCart(): Flow<List<OrderWithItemsDB>> = appDatabase.getOrderWithItemsDao().getCart()
     override suspend fun addToCart(item: OrderItemDB) {
-        appDatabase.getOrderWithItemsDao().insertOrderItem(item)
-        appDatabase.getOrderWithItemsDao().insertOrder(OrderDB(orderId = OrderDB.CART_ORDER_ID, isStillInCart = true))
+        if (item.quantityOfItems > 0){
+            appDatabase.getOrderWithItemsDao().insertOrderItem(item)
+            appDatabase.getOrderWithItemsDao().insertOrder(OrderDB(orderId = OrderDB.CART_ORDER_ID, isStillInCart = true))
+        } else {
+            appDatabase.getOrderWithItemsDao().deleteOrderItem(item)
+        }
     }
 }

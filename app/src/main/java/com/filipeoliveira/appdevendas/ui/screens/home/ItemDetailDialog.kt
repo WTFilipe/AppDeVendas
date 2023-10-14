@@ -24,10 +24,11 @@ import java.math.BigDecimal
 fun ItemDetailDialog(
     availableItem: AvailableItem,
     onDismiss: (AvailableItem, Long) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    selectedQuantity: Long = 0
 ) {
     var selectedQuantity by rememberSaveable {
-        mutableLongStateOf(0)
+        mutableLongStateOf(selectedQuantity)
     }
 
     Dialog(
