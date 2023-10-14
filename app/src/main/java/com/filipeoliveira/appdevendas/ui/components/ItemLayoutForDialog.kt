@@ -34,12 +34,11 @@ import java.math.BigDecimal
 fun ItemLayoutForDialog(
     availableItem: AvailableItem,
     modifier: Modifier = Modifier,
+    selectedQuantity: Long,
     onAddItemClicked: (() -> Unit),
     onRemoveItemClicked: (() -> Unit),
 ) {
-    var selectedQuantity by rememberSaveable {
-        mutableIntStateOf(0)
-    }
+
     Card(
         modifier
             .wrapContentHeight()
@@ -61,19 +60,17 @@ fun ItemLayoutForDialog(
                         .fillMaxWidth()
                         .weight(1F)
                         .clickable {
-                            selectedQuantity += 1
+                            onAddItemClicked()
                         }
                         .padding(start = dimen16Dp)
                 )
-                if (selectedQuantity > 0){
+                if (selectedQuantity > 0) {
                     ItemLayoutBottomRight(
                         selectedQuantity = selectedQuantity,
                         onRemoveItemClicked = {
-                            selectedQuantity -= 1
                             onRemoveItemClicked()
                         },
                         onAddItemClicked = {
-                            selectedQuantity += 1
                             onAddItemClicked()
                         },
                         modifier = Modifier
@@ -109,7 +106,7 @@ private fun ItemLayoutBottomLeft(
 
 @Composable
 private fun ItemLayoutBottomRight(
-    selectedQuantity: Int,
+    selectedQuantity: Long,
     onAddItemClicked: () -> Unit,
     onRemoveItemClicked: () -> Unit,
     modifier: Modifier = Modifier
@@ -148,7 +145,12 @@ private fun ItemLayoutBottomRight(
 @Preview(name = "Layout for List", heightDp = 300)
 @Composable
 fun LayoutForDialogPreview() {
-    ItemLayoutForDialog(availableItem = availableItem, onAddItemClicked =  {}, onRemoveItemClicked =  {})
+    ItemLayoutForDialog(
+        availableItem = availableItem,
+        onAddItemClicked = {},
+        onRemoveItemClicked = {},
+        selectedQuantity = 0L
+    )
 }
 
 private val availableItem = AvailableItem(

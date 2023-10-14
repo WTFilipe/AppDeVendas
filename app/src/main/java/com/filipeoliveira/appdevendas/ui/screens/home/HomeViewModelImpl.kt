@@ -2,6 +2,8 @@ package com.filipeoliveira.appdevendas.ui.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.filipeoliveira.appdevendas.data.model.AvailableItem
+import com.filipeoliveira.appdevendas.domain.AddToCartUseCase
 import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCase
 import com.filipeoliveira.appdevendas.domain.GetCartUseCase
 import com.filipeoliveira.appdevendas.domain.Result
@@ -18,6 +20,7 @@ import javax.inject.Inject
 class HomeViewModelImpl @Inject constructor(
     private val getAvailableItemListUseCase: GetAvailableItemListUseCase,
     private val getCartUseCase: GetCartUseCase,
+    private val addToCartUseCase: AddToCartUseCase,
 ) : ViewModel(), HomeViewModel {
 
     private var _homeScreenModel = MutableStateFlow(
@@ -32,6 +35,7 @@ class HomeViewModelImpl @Inject constructor(
 
     init {
         this.loadAvailableItems()
+        this.getCart()
     }
 
     override fun loadAvailableItems() {
@@ -75,35 +79,37 @@ class HomeViewModelImpl @Inject constructor(
     }
 
     override fun getCart() {
-        _homeScreenModel.value = _homeScreenModel.value.copy(
-            cartPrice = BigDecimal(123.24),
-            cartItemQuantity = 5L
-        )
-//        viewModelScope.launch(Dispatchers.IO) {
-//            getCartUseCase.execute()
-//                .catch {
-//                    _homeScreenModel.value = _homeScreenModel.value.copy(
-//                        cartPrice = BigDecimal.ZERO,
-//                        cartItemQuantity = 0L
-//                    )
-//                }
-//                .collect { result ->
-//                    when (result) {
-//                        is Result.Success -> {
-//                            _homeScreenModel.value = _homeScreenModel.value.copy(
-//                                cartPrice = result.data.order.orderValue,
-//                                cartItemQuantity = result.data.order.quantityOfItems
-//                            )
-//                        }
-//
-//                        is Result.Error -> {
-//                            _homeScreenModel.value = _homeScreenModel.value.copy(
-//                                cartPrice = BigDecimal.ZERO,
-//                                cartItemQuantity = 0L
-//                            )
-//                        }
-//                    }
-//                }
-//        }
+        viewModelScope.launch(Dispatchers.IO) {
+            getCartUseCase.execute()
+                .catch {
+                    _homeScreenModel.value = _homeScreenModel.value.copy(
+                        cartPrice = BigDecimal.ZERO,
+                        cartItemQuantity = 0L
+                    )
+                }
+                .collect { result ->
+                    when (result) {
+                        is Result.Success -> {
+                            _homeScreenModel.value = _homeScreenModel.value.copy(
+                                cartPrice = result.data.orderValue,
+                                cartItemQuantity = result.data.quantityOfItems
+                            )
+                        }
+
+                        is Result.Error -> {
+                            _homeScreenModel.value = _homeScreenModel.value.copy(
+                                cartPrice = BigDecimal.ZERO,
+                                cartItemQuantity = 0L
+                            )
+                        }
+                    }
+                }
+        }
+    }
+
+    override fun addToCard(availableItem: AvailableItem, quantity: Long) {
+       viewModelScope.launch(Dispatchers.IO) {
+           addToCartUseCase.execute(availableItem, quantity)
+       }
     }
 }

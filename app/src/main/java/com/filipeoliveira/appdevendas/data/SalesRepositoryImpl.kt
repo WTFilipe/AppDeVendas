@@ -7,7 +7,6 @@ import com.filipeoliveira.appdevendas.data.model.OrderWithItems
 import com.filipeoliveira.appdevendas.data.remote.SalesRemoteData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import java.math.BigDecimal
 import javax.inject.Inject
 
 class SalesRepositoryImpl @Inject constructor (
@@ -26,15 +25,19 @@ class SalesRepositoryImpl @Inject constructor (
         }
     }
 
-    override suspend fun getCart(): Flow<OrderWithItems> = localData.getOrderWithItemsList().map { list ->
+    override suspend fun getCart(): Flow<OrderWithItems> = localData.getCart().map { list ->
         val cart = list.firstOrNull()
 
         cart?.toOrderWithItems() ?: kotlin.run {
             OrderWithItems(
-                order = Order(orderId = 0, quantityOfItems = 0, orderValue = BigDecimal.ZERO),
+                order = Order(orderId = 0),
                 items = emptyList()
             )
         }
+    }
+
+    override suspend fun addToCart(availableItem: AvailableItem, selectedQuantity: Long) {
+        localData.addToCart(availableItem.toOrderItemDB(selectedQuantity))
     }
 
 }

@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,13 +17,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.filipeoliveira.appdevendas.data.model.AvailableItem
 import com.filipeoliveira.appdevendas.ui.components.CartResumeForHome
 import com.filipeoliveira.appdevendas.ui.components.ItemLayoutForList
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
-import com.filipeoliveira.appdevendas.ui.dimen8Dp
 import java.math.BigDecimal
 
 @Composable
@@ -51,10 +49,13 @@ private fun ScreenContent(
 
         if (uiState.availableAvailableItemList.isNotEmpty()) {
             OnAvailableItemsSuccess(
-                uiState.availableAvailableItemList,
+                data = uiState.availableAvailableItemList,
                 modifier = modifier
                     .fillMaxWidth()
-                    .weight(1F)
+                    .weight(1F),
+                onAddToCart = { item, selectedQuantity ->
+                    homeViewModel.addToCard(item, selectedQuantity)
+                }
             )
         }
 
@@ -65,11 +66,14 @@ private fun ScreenContent(
             )
         }
     }
-    homeViewModel.getCart()
 }
 
 @Composable
-fun OnAvailableItemsSuccess(data: List<AvailableItem>, modifier: Modifier = Modifier) {
+fun OnAvailableItemsSuccess(
+    data: List<AvailableItem>,
+    onAddToCart: (AvailableItem, Long) -> Unit,
+    modifier: Modifier = Modifier
+) {
     var showDetailDialog by rememberSaveable {
         mutableStateOf<AvailableItem?>(null)
     }
@@ -85,7 +89,7 @@ fun OnAvailableItemsSuccess(data: List<AvailableItem>, modifier: Modifier = Modi
                     showDetailDialog = item
                 },
                 onAddToCardClicked = { item ->
-
+                    onAddToCart(item, 1)
                 }
             )
             Spacer(modifier = Modifier.height(dimen16Dp))
@@ -95,9 +99,10 @@ fun OnAvailableItemsSuccess(data: List<AvailableItem>, modifier: Modifier = Modi
     showDetailDialog?.let {
         ItemDetailDialog(
             availableItem = it,
-            onDismiss = { showDetailDialog = null },
-            onAddItemClicked = {},
-            onRemoveItemClicked = {}
+            onDismiss = { item, selectedQuantity ->
+                showDetailDialog = null
+                onAddToCart(item,  selectedQuantity)
+            }
         )
     }
 }
@@ -115,5 +120,5 @@ fun OnAvailableItemsSuccessPreview() {
             sku = "1234"
         )
     }
-    OnAvailableItemsSuccess(data = fakeList)
+    OnAvailableItemsSuccess(data = fakeList, onAddToCart = {_,_ -> })
 }

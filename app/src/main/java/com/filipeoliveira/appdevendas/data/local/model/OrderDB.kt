@@ -9,9 +9,11 @@ import java.math.BigDecimal
 @Entity
 data class OrderDB (
     @PrimaryKey val orderId: Long,
-    @ColumnInfo val quantityOfItems: Long,
-    @ColumnInfo val orderValue: String,
     @ColumnInfo val isStillInCart: Boolean
 ) {
-    fun toOrder() = Order(orderId = orderId, quantityOfItems = quantityOfItems, orderValue = BigDecimal(orderValue))
+    fun toOrder() = Order(orderId = orderId)
+
+    companion object {
+        const val CART_ORDER_ID = -1L
+    }
 }

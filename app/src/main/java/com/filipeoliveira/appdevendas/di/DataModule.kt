@@ -6,6 +6,8 @@ import com.filipeoliveira.appdevendas.data.local.SalesLocalData
 import com.filipeoliveira.appdevendas.data.local.SalesLocalDataImpl
 import com.filipeoliveira.appdevendas.data.remote.SalesRemoteData
 import com.filipeoliveira.appdevendas.data.remote.SalesRemoteDataImpl
+import com.filipeoliveira.appdevendas.domain.AddToCartUseCase
+import com.filipeoliveira.appdevendas.domain.AddToCartUseCaseImpl
 import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCase
 import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCaseImpl
 import com.filipeoliveira.appdevendas.domain.GetCartUseCase
@@ -28,4 +30,6 @@ abstract class DataModule {
     abstract fun providesGetAvailableItemListUseCase(getAvailableItemListUseCase: GetAvailableItemListUseCaseImpl) : GetAvailableItemListUseCase
     @Binds
     abstract fun providesGetCartUseCase(getCartUseCaseImpl: GetCartUseCaseImpl) : GetCartUseCase
+    @Binds
+    abstract fun providesAddToCartUseCase(addToCartUseCaseImpl: AddToCartUseCaseImpl) : AddToCartUseCase
 }

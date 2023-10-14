@@ -148,6 +148,10 @@ fun ItemLayoutBottom(
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.labelLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier
+                .clickable {
+                    onAddToCartClicked?.let { it() }
+                }
         )
     }
 

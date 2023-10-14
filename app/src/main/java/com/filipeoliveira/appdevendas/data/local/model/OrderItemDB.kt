@@ -9,14 +9,16 @@ import java.math.BigDecimal
 @Entity
 data class OrderItemDB(
     @PrimaryKey val sku: String,
-    @ColumnInfo val quantityOfItems: Int,
+    @ColumnInfo val quantityOfItems: Long,
     @ColumnInfo val name: String,
     @ColumnInfo val description: String,
     @ColumnInfo val imageURL: String,
-    @ColumnInfo val valuePerItem: String,
-    @ColumnInfo val totalValue: String,
+    @ColumnInfo val valuePerItem: Long,
     @ColumnInfo val orderId: Long
 ) {
+    val totalValue: BigDecimal
+        get() = quantityOfItems.toBigDecimal() * valuePerItem.toBigDecimal()
+
     fun toOrderItem() = OrderItem(
         sku = sku,
         quantityOfItems = quantityOfItems,
@@ -24,7 +26,6 @@ data class OrderItemDB(
         description = description,
         imageURL = imageURL,
         valuePerItem = BigDecimal(valuePerItem),
-        totalValue = BigDecimal(totalValue),
         orderId = orderId
     )
 }

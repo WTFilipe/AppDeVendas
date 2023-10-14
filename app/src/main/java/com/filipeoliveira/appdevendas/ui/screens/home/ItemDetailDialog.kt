@@ -5,6 +5,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
@@ -18,13 +23,15 @@ import java.math.BigDecimal
 @Composable
 fun ItemDetailDialog(
     availableItem: AvailableItem,
-    onDismiss: () -> Unit,
-    onAddItemClicked: () -> Unit,
-    onRemoveItemClicked: () -> Unit,
+    onDismiss: (AvailableItem, Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var selectedQuantity by rememberSaveable {
+        mutableLongStateOf(0)
+    }
+
     Dialog(
-        onDismissRequest = { onDismiss() },
+        onDismissRequest = { onDismiss(availableItem, selectedQuantity) },
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ){
         Card(
@@ -36,8 +43,9 @@ fun ItemDetailDialog(
             ItemLayoutForDialog(
                 availableItem = availableItem,
                 modifier = modifier,
-                onAddItemClicked = { onAddItemClicked() },
-                onRemoveItemClicked = { onRemoveItemClicked() }
+                onAddItemClicked = { selectedQuantity += 1 },
+                onRemoveItemClicked = { selectedQuantity -= 1 },
+                selectedQuantity = selectedQuantity
             )
         }
     }
@@ -54,5 +62,5 @@ fun ItemDetailDialogPreview() {
         sku = "1"
     )
 
-    ItemDetailDialog(availableItem, {}, {}, {})
+    ItemDetailDialog(availableItem, { _, _ -> })
 }

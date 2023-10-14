@@ -6,11 +6,13 @@ import java.math.BigDecimal
 @Entity
 data class OrderItem (
     val sku: String,
-    val quantityOfItems: Int,
+    val quantityOfItems: Long,
     val name: String,
     val description: String,
     val imageURL: String,
     val valuePerItem: BigDecimal,
-    val totalValue: BigDecimal,
     val orderId: Long
-)
+) {
+    val totalValue: BigDecimal
+        get() = quantityOfItems.toBigDecimal() * valuePerItem
+}
