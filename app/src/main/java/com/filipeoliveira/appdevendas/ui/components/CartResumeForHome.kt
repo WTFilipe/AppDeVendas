@@ -17,10 +17,10 @@ import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.filipeoliveira.appdevendas.R
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen8Dp
 import java.math.BigDecimal
@@ -64,9 +64,13 @@ private fun CartResumeLeft(
             .padding(vertical = dimen16Dp),
         verticalArrangement = Arrangement.SpaceAround,
     ) {
-        Text("Items in this Order: $itemQuantity")
+        Text(stringResource(R.string.label_order_items_quantity, itemQuantity))
         Spacer(Modifier.height(dimen8Dp))
-        Text("Total price: R$${totalPrice.setScale(2, RoundingMode.FLOOR)}")
+        Text(
+            stringResource(
+                R.string.label_order_total_price,
+                totalPrice.setScale(2, RoundingMode.UNNECESSARY)
+            ))
     }
 }
 @Composable
@@ -83,7 +87,7 @@ private fun CartResumeRight(onButtonClick: () -> Unit, modifier: Modifier = Modi
             )
         ){
             Text(
-                text = "Abrir carrinho",
+                text = stringResource(R.string.label_open_cart),
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }

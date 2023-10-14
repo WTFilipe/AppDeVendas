@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">App de Vendas</string>
+
     <string name="title_home">Home</string>
+    <string name="label_order_items_quantity">Items in this Order: %1$s</string>
+    <string name="label_order_total_price">Total price: R$%1$s</string>
+    <string name="label_open_cart">Open cart</string>
+    <string name="label_add_to_cart">Add to cart</string>
 </resources>
