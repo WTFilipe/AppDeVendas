@@ -12,7 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.filipeoliveira.appdevendas.ui.screens.home.Screens
+import com.filipeoliveira.appdevendas.ui.screens.Screens
 
 @Composable
 fun SalesBottomNavigation (

@@ -11,7 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.filipeoliveira.appdevendas.ui.components.SalesBottomNavigation
 import com.filipeoliveira.appdevendas.ui.screens.home.HomeScreen
-import com.filipeoliveira.appdevendas.ui.screens.home.Screens
+import com.filipeoliveira.appdevendas.ui.screens.Screens
 import com.filipeoliveira.appdevendas.ui.theme.AppDeVendasTheme
 import dagger.hilt.android.AndroidEntryPoint
 

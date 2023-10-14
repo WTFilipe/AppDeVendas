@@ -1,4 +1,4 @@
-package com.filipeoliveira.appdevendas.ui.screens.home
+package com.filipeoliveira.appdevendas.ui.screens
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons

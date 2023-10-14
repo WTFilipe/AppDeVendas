@@ -12,6 +12,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,14 +29,14 @@ import java.math.BigDecimal
 fun HomeScreen(
     modifier: Modifier = Modifier,
     homeViewModel: HomeViewModelImpl = hiltViewModel()
-){
+) {
     val uiState = homeViewModel.homeScreenModel.collectAsState().value
 
     Surface(
         modifier
             .background(MaterialTheme.colorScheme.background)
     ) {
-        when{
+        when {
             uiState.availableItemList.isNotEmpty() -> OnAvailableItemsSuccess(uiState.availableItemList)
             else -> {
                 Box {
@@ -45,23 +49,43 @@ fun HomeScreen(
 
 @Composable
 fun OnAvailableItemsSuccess(data: List<Item>, modifier: Modifier = Modifier) {
+    var showDetailDialog by rememberSaveable {
+        mutableStateOf<Item?>(null)
+    }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize(),
         contentPadding = PaddingValues(dimen16Dp),
     ) {
-        items(data.size){
+        items(data.size) {
             ItemLayoutForList(
-                item = data[it]
+                item = data[it],
+                onItemClicked = { item ->
+                    showDetailDialog = item
+                },
+                onAddToCardClicked = { item ->
+
+                }
             )
             Spacer(modifier = Modifier.height(dimen16Dp))
         }
     }
+
+    showDetailDialog?.let {
+        ItemDetailDialog(
+            item = it,
+            onDismiss = { showDetailDialog = null},
+            onAddItemClicked = {},
+            onRemoveItemClicked = {}
+        )
+    }
 }
+
 @Preview
 @Composable
 fun OnAvailableItemsSuccessPreview() {
-    val fakeList = List(10){
+    val fakeList = List(10) {
         Item(
             name = "Carrinho de controle remoto",
             description = "Carrinho controlado por controle sem fio via Wifi. " +
