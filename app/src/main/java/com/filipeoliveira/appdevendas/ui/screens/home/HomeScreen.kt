@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -21,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.filipeoliveira.appdevendas.data.model.AvailableItem
+import com.filipeoliveira.appdevendas.ui.components.CartResumeForHome
 import com.filipeoliveira.appdevendas.ui.components.ItemLayoutForList
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
+import com.filipeoliveira.appdevendas.ui.dimen8Dp
 import java.math.BigDecimal
 
 @Composable
@@ -56,7 +59,10 @@ private fun ScreenContent(
         }
 
         if (uiState.cartItemQuantity > 0){
-            Text("AAAAAAAAAAAA")
+            CartResumeForHome(
+                uiState.cartItemQuantity,
+                uiState.cartPrice
+            )
         }
     }
     homeViewModel.getCart()

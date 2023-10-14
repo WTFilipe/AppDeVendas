@@ -76,8 +76,8 @@ class HomeViewModelImpl @Inject constructor(
 
     override fun getCart() {
         _homeScreenModel.value = _homeScreenModel.value.copy(
-            cartPrice = BigDecimal.ZERO,
-            cartItemQuantity = 1L
+            cartPrice = BigDecimal(123.24),
+            cartItemQuantity = 5L
         )
 //        viewModelScope.launch(Dispatchers.IO) {
 //            getCartUseCase.execute()
