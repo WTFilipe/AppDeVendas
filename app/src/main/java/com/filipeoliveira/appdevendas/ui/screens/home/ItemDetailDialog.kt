@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.filipeoliveira.appdevendas.data.model.Item
+import com.filipeoliveira.appdevendas.data.model.AvailableItem
 import com.filipeoliveira.appdevendas.ui.components.ItemLayoutForDialog
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen8Dp
@@ -17,7 +17,7 @@ import java.math.BigDecimal
 
 @Composable
 fun ItemDetailDialog(
-    item: Item,
+    availableItem: AvailableItem,
     onDismiss: () -> Unit,
     onAddItemClicked: () -> Unit,
     onRemoveItemClicked: () -> Unit,
@@ -34,7 +34,7 @@ fun ItemDetailDialog(
             shape = RoundedCornerShape(dimen16Dp),
         ) {
             ItemLayoutForDialog(
-                item = item,
+                availableItem = availableItem,
                 modifier = modifier,
                 onAddItemClicked = { onAddItemClicked() },
                 onRemoveItemClicked = { onRemoveItemClicked() }
@@ -45,13 +45,14 @@ fun ItemDetailDialog(
 @Preview(heightDp = 350)
 @Composable
 fun ItemDetailDialogPreview() {
-    val item = Item(
+    val availableItem = AvailableItem(
         name = "Carrinho de controle remoto",
         description = "Carrinho controlado por controle sem fio via Wifi. " +
                 "Controle seu carrinho com até 50 metros de distância e alcance até 5 km/h",
         value = BigDecimal.valueOf(307.74),
-        imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg"
+        imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg",
+        sku = "1"
     )
 
-    ItemDetailDialog(item, {}, {}, {})
+    ItemDetailDialog(availableItem, {}, {}, {})
 }

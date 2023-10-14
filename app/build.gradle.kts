@@ -82,5 +82,10 @@ dependencies {
     //Navigation - Compose
     implementation("androidx.navigation:navigation-compose:2.7.4")
 
+    //Room Dabatase
+    implementation("androidx.room:room-runtime:2.5.2")
+    implementation("androidx.room:room-ktx:2.5.2")
+    kapt("androidx.room:room-compiler:2.5.2")
+
 }
 

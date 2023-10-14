@@ -24,7 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.filipeoliveira.appdevendas.R
-import com.filipeoliveira.appdevendas.data.model.Item
+import com.filipeoliveira.appdevendas.data.model.AvailableItem
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen30Dp
 import com.filipeoliveira.appdevendas.ui.dimen8Dp
@@ -32,7 +32,7 @@ import java.math.BigDecimal
 
 @Composable
 fun ItemLayoutForDialog(
-    item: Item,
+    availableItem: AvailableItem,
     modifier: Modifier = Modifier,
     onAddItemClicked: (() -> Unit),
     onRemoveItemClicked: (() -> Unit),
@@ -51,7 +51,7 @@ fun ItemLayoutForDialog(
         Column(
             modifier = Modifier
         ) {
-            ItemLayoutTop(item)
+            ItemLayoutTop(availableItem)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(vertical = dimen16Dp)
@@ -148,13 +148,14 @@ private fun ItemLayoutBottomRight(
 @Preview(name = "Layout for List", heightDp = 300)
 @Composable
 fun LayoutForDialogPreview() {
-    ItemLayoutForDialog(item = item, onAddItemClicked =  {}, onRemoveItemClicked =  {})
+    ItemLayoutForDialog(availableItem = availableItem, onAddItemClicked =  {}, onRemoveItemClicked =  {})
 }
 
-private val item = Item(
+private val availableItem = AvailableItem(
     name = "Carrinho de controle remoto",
     description = "Carrinho controlado por controle sem fio via Wifi. " +
             "Controle seu carrinho com até 50 metros de distância e alcance até 5 km/h",
     value = BigDecimal.valueOf(307.74),
-    imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg"
+    imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg",
+    sku = "1"
 )

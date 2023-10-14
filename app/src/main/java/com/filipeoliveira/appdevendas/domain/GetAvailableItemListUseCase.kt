@@ -1,8 +1,8 @@
 package com.filipeoliveira.appdevendas.domain
 
-import com.filipeoliveira.appdevendas.data.model.Item
+import com.filipeoliveira.appdevendas.data.model.AvailableItem
 import kotlinx.coroutines.flow.Flow
 
 interface GetAvailableItemListUseCase {
-    suspend fun execute() : Flow<Result<List<Item>>>
+    suspend fun execute() : Flow<Result<List<AvailableItem>>>
 }

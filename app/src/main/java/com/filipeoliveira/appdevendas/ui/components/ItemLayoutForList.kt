@@ -23,7 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
-import com.filipeoliveira.appdevendas.data.model.Item
+import com.filipeoliveira.appdevendas.data.model.AvailableItem
 import com.filipeoliveira.appdevendas.ui.dimen12Dp
 import com.filipeoliveira.appdevendas.ui.dimen150Dp
 import com.filipeoliveira.appdevendas.ui.dimen20Dp
@@ -32,17 +32,17 @@ import java.math.BigDecimal
 
 @Composable
 fun ItemLayoutForList(
-    item: Item,
+    availableItem: AvailableItem,
     modifier: Modifier = Modifier,
-    onItemClicked: ((Item) -> Unit),
-    onAddToCardClicked: ((Item) -> Unit),
+    onItemClicked: ((AvailableItem) -> Unit),
+    onAddToCardClicked: ((AvailableItem) -> Unit),
 ) {
     Card(
         modifier
             .wrapContentHeight()
             .fillMaxWidth()
             .clickable {
-                onItemClicked(item)
+                onItemClicked(availableItem)
             },
         elevation = CardDefaults.cardElevation(
             defaultElevation = dimen8Dp
@@ -51,15 +51,15 @@ fun ItemLayoutForList(
         Column(
             modifier = Modifier
         ) {
-            ItemLayoutTop(item, titleMaxLines = 2, subtitleMaxLines = 2)
-            ItemLayoutBottom(modifier = modifier.clickable { onAddToCardClicked(item) })
+            ItemLayoutTop(availableItem, titleMaxLines = 2, subtitleMaxLines = 2)
+            ItemLayoutBottom(modifier = modifier.clickable { onAddToCardClicked(availableItem) })
         }
     }
 }
 
 @Composable
 fun ItemLayoutTop(
-    item: Item,
+    availableItem: AvailableItem,
     titleMaxLines: Int = Int.MAX_VALUE,
     subtitleMaxLines: Int = Int.MAX_VALUE
 ) {
@@ -68,9 +68,9 @@ fun ItemLayoutTop(
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface)
     ) {
-        ItemLayoutTopLeft(item)
+        ItemLayoutTopLeft(availableItem)
         ItemLayoutTopRight(
-            item = item,
+            availableItem = availableItem,
             modifier = Modifier.height(IntrinsicSize.Max),
             titleMaxLines = titleMaxLines,
             subtitleMaxLines = subtitleMaxLines
@@ -79,9 +79,9 @@ fun ItemLayoutTop(
 }
 
 @Composable
-fun ItemLayoutTopLeft(item: Item) {
+fun ItemLayoutTopLeft(availableItem: AvailableItem) {
     AsyncImage(
-        model = item.imageURL,
+        model = availableItem.imageURL,
         contentDescription = null,
         modifier = Modifier
             .size(dimen150Dp)
@@ -90,7 +90,7 @@ fun ItemLayoutTopLeft(item: Item) {
 
 @Composable
 fun ItemLayoutTopRight(
-    item: Item,
+    availableItem: AvailableItem,
     modifier: Modifier = Modifier,
     titleMaxLines: Int = Int.MAX_VALUE,
     subtitleMaxLines: Int = Int.MAX_VALUE
@@ -102,7 +102,7 @@ fun ItemLayoutTopRight(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         Text(
-            text = item.name,
+            text = availableItem.name,
             modifier = Modifier.fillMaxWidth(),
             maxLines = titleMaxLines,
             style = MaterialTheme.typography.titleMedium,
@@ -110,7 +110,7 @@ fun ItemLayoutTopRight(
         )
         Spacer(Modifier.height(dimen8Dp))
         Text(
-            text = item.description,
+            text = availableItem.description,
             modifier = Modifier.fillMaxWidth(),
             overflow = TextOverflow.Ellipsis,
             maxLines = subtitleMaxLines,
@@ -119,7 +119,7 @@ fun ItemLayoutTopRight(
         )
         Spacer(Modifier.height(dimen20Dp))
         Text(
-            text = item.value.toString(),
+            text = availableItem.value.toString(),
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.End,
             style = MaterialTheme.typography.bodyMedium,
@@ -156,13 +156,14 @@ fun ItemLayoutBottom(
 @Preview(name = "Layout for List", heightDp = 300)
 @Composable
 fun LayoutForListPreview() {
-    ItemLayoutForList(item = item, onItemClicked = {}, onAddToCardClicked =  {})
+    ItemLayoutForList(availableItem = availableItem, onItemClicked = {}, onAddToCardClicked =  {})
 }
 
-private val item = Item(
+private val availableItem = AvailableItem(
     name = "Carrinho de controle remoto",
     description = "Carrinho controlado por controle sem fio via Wifi. " +
             "Controle seu carrinho com até 50 metros de distância e alcance até 5 km/h",
     value = BigDecimal.valueOf(307.74),
-    imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg"
+    imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg",
+    sku = "1"
 )
