@@ -3,6 +3,8 @@ package com.filipeoliveira.appdevendas.ui.screens.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.filipeoliveira.appdevendas.data.model.AvailableItem
+import com.filipeoliveira.appdevendas.data.model.Order
+import com.filipeoliveira.appdevendas.data.model.OrderWithItems
 import com.filipeoliveira.appdevendas.domain.AddToCartUseCase
 import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCase
 import com.filipeoliveira.appdevendas.domain.GetCartUseCase
@@ -80,12 +82,23 @@ class ScreenHomeViewModelImpl @Inject constructor(
     override fun getCart() {
         viewModelScope.launch(Dispatchers.IO) {
             getCartUseCase.execute()
-                .catch {}
+                .catch {
+                    _ScreenHomeModel.value = _ScreenHomeModel.value.copy(
+                        cart = OrderWithItems(Order(-1), emptyList())
+                    )
+                }
                 .collect { result ->
-                    if (result is Result.Success){
-                        _ScreenHomeModel.value = _ScreenHomeModel.value.copy(
-                            cart = result.data
-                        )
+                    when(result){
+                        is Result.Success -> {
+                            _ScreenHomeModel.value = _ScreenHomeModel.value.copy(
+                                cart = result.data
+                            )
+                        }
+                        is Result.Error -> {
+                            _ScreenHomeModel.value = _ScreenHomeModel.value.copy(
+                                cart = OrderWithItems(Order(-1), emptyList())
+                            )
+                        }
                     }
                 }
         }
