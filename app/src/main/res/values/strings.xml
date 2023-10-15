@@ -14,8 +14,12 @@
     <string name="label_item_total_value">Total for this item:</string>
     <string name="label_finish_purchase">Finish purchase</string>
     <string name="label_loading">Loading</string>
+    <string name="label_yes">Yes</string>
+    <string name="label_no">No</string>
 
     <string name="error_empty_response">No items to show</string>
     <string name="error_generic">An error occurred. Please, try again.</string>
+
+    <string name="feedback_confirm_purchase">Finishing purchase. Would you like to proceed?</string>
 
 </resources>

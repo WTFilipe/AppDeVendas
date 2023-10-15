@@ -25,4 +25,6 @@ interface OrderWithItemsDAO {
     fun insertOrderItem(orderItemDB: OrderItemDB)
     @Delete
     fun deleteOrderItem(orderItemDB: OrderItemDB)
+    @Query("DELETE FROM OrderItemDB WHERE orderId == -1")
+    fun deleteCart()
 }

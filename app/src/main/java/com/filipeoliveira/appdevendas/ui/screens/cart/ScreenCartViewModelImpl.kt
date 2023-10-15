@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.filipeoliveira.appdevendas.data.model.Order
 import com.filipeoliveira.appdevendas.data.model.OrderWithItems
+import com.filipeoliveira.appdevendas.domain.FinishPurchaseUseCase
 import com.filipeoliveira.appdevendas.domain.GetCartUseCase
 import com.filipeoliveira.appdevendas.domain.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ScreenCartViewModelImpl @Inject constructor(
     private val getCartUseCase: GetCartUseCase,
+    private val finishPurchaseUseCase: FinishPurchaseUseCase
 ) : ViewModel(), ScreenCartViewModel {
 
     private var _screenCartModel = MutableStateFlow(
@@ -67,6 +69,12 @@ class ScreenCartViewModelImpl @Inject constructor(
                         }
                     }
                 }
+        }
+    }
+
+    override fun finishPurchase(orderWithItems: OrderWithItems) {
+        viewModelScope.launch(Dispatchers.IO) {
+            finishPurchaseUseCase.execute(orderWithItems)
         }
     }
 

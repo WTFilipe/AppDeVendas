@@ -19,4 +19,13 @@ class SalesLocalDataImpl @Inject constructor (
             appDatabase.getOrderWithItemsDao().deleteOrderItem(item)
         }
     }
+
+    override suspend fun finishPurchase(orderWithItems: OrderWithItemsDB) {
+        val orderID = System.currentTimeMillis()
+        for (item in orderWithItems.items){
+            appDatabase.getOrderWithItemsDao().insertOrderItem(item.copy(orderId = orderID))
+        }
+        appDatabase.getOrderWithItemsDao().insertOrder(OrderDB(orderId = orderID, isStillInCart = false))
+        appDatabase.getOrderWithItemsDao().deleteCart()
+    }
 }

@@ -8,10 +8,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,10 +27,11 @@ import com.filipeoliveira.appdevendas.data.model.Order
 import com.filipeoliveira.appdevendas.data.model.OrderItem
 import com.filipeoliveira.appdevendas.data.model.OrderWithItems
 import com.filipeoliveira.appdevendas.domain.errors.EmptyResponseError
-import com.filipeoliveira.appdevendas.ui.dimen16Dp
-import com.filipeoliveira.appdevendas.ui.dimen8Dp
+import com.filipeoliveira.appdevendas.ui.components.BasicDialog
 import com.filipeoliveira.appdevendas.ui.components.CartResume
 import com.filipeoliveira.appdevendas.ui.components.Loading
+import com.filipeoliveira.appdevendas.ui.dimen16Dp
+import com.filipeoliveira.appdevendas.ui.dimen8Dp
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -36,12 +42,16 @@ fun ScreenCart(
     ScreenContent(modifier)
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ScreenContent(
     modifier: Modifier = Modifier,
     screenCartViewModel: ScreenCartViewModelImpl = hiltViewModel()
 ) {
     val uiState = screenCartViewModel.screenCartModel.collectAsState().value
+    var showDialog: Boolean by rememberSaveable{
+        mutableStateOf(false)
+    }
 
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -66,7 +76,18 @@ private fun ScreenContent(
                 totalPrice = uiState.cart.orderValue,
                 buttonText = stringResource(R.string.label_finish_purchase),
                 onButtonClick = {
+                    showDialog = true
+                }
+            )
+        }
 
+        if (showDialog){
+            BasicDialog(
+                text = stringResource(R.string.feedback_confirm_purchase),
+                onDismiss = { showDialog = false },
+                onConfirm = {
+                    showDialog = false
+                    screenCartViewModel.finishPurchase(orderWithItems = uiState.cart)
                 }
             )
         }

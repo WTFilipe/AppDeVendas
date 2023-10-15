@@ -8,6 +8,8 @@ import com.filipeoliveira.appdevendas.data.remote.SalesRemoteData
 import com.filipeoliveira.appdevendas.data.remote.SalesRemoteDataImpl
 import com.filipeoliveira.appdevendas.domain.AddToCartUseCase
 import com.filipeoliveira.appdevendas.domain.AddToCartUseCaseImpl
+import com.filipeoliveira.appdevendas.domain.FinishPurchaseUseCase
+import com.filipeoliveira.appdevendas.domain.FinishPurchaseUseCaseImpl
 import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCase
 import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCaseImpl
 import com.filipeoliveira.appdevendas.domain.GetCartUseCase
@@ -32,4 +34,6 @@ abstract class DataModule {
     abstract fun providesGetCartUseCase(getCartUseCaseImpl: GetCartUseCaseImpl) : GetCartUseCase
     @Binds
     abstract fun providesAddToCartUseCase(addToCartUseCaseImpl: AddToCartUseCaseImpl) : AddToCartUseCase
+    @Binds
+    abstract fun providesFinishPurchaseUseCase(finishPurchaseUseCaseImpl: FinishPurchaseUseCaseImpl) : FinishPurchaseUseCase
 }
