@@ -13,7 +13,7 @@ data class OrderItemDB(
     @ColumnInfo val name: String,
     @ColumnInfo val description: String,
     @ColumnInfo val imageURL: String,
-    @ColumnInfo val valuePerItem: Long,
+    @ColumnInfo val valuePerItem: String,
     @ColumnInfo val orderId: Long
 ) {
     val totalValue: BigDecimal

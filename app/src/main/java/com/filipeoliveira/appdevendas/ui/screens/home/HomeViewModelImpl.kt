@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import java.math.BigDecimal
 import javax.inject.Inject
 
 @HiltViewModel
@@ -92,7 +91,7 @@ class HomeViewModelImpl @Inject constructor(
         }
     }
 
-    override fun addToCard(availableItem: AvailableItem, quantity: Long) {
+    override fun addToCart(availableItem: AvailableItem, quantity: Long) {
        viewModelScope.launch(Dispatchers.IO) {
            addToCartUseCase.execute(availableItem, quantity)
        }

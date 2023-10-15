@@ -53,7 +53,7 @@ private fun ScreenContent(
                     .fillMaxWidth()
                     .weight(1F),
                 onAddToCart = { item, selectedQuantity ->
-                    homeViewModel.addToCard(item, selectedQuantity)
+                    homeViewModel.addToCart(item, selectedQuantity)
                 }
             )
         }

@@ -3,6 +3,7 @@ package com.filipeoliveira.appdevendas.data.model
 import com.filipeoliveira.appdevendas.data.local.model.OrderDB
 import com.filipeoliveira.appdevendas.data.local.model.OrderItemDB
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 data class AvailableItem(
     val sku: String,
@@ -17,7 +18,7 @@ data class AvailableItem(
         name = name,
         description = description,
         imageURL = imageURL,
-        valuePerItem = value.toLong(),
+        valuePerItem = value.setScale(2, RoundingMode.FLOOR).toString(),
         orderId = orderID,
     )
 }
