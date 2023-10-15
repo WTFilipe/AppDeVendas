@@ -92,7 +92,9 @@ fun OnAvailableItemsSuccess(
                     onAddToCart(item, 1)
                 }
             )
-            Spacer(modifier = Modifier.height(dimen16Dp))
+            if (it != availableItems.size - 1){
+                Spacer(modifier = Modifier.height(dimen16Dp))
+            }
         }
     }
 
