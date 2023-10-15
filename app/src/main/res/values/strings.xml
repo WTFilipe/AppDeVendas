@@ -3,9 +3,10 @@
 
     <string name="title_home">Home</string>
     <string name="title_cart">Cart</string>
+    <string name="title_orders">Orders</string>
 
     <string name="label_order_items_quantity">Items in this Order: %1$s</string>
-    <string name="label_order_total_price">Total price: R$%1$s</string>
+    <string name="label_order_total_price">Total price: </string>
     <string name="label_open_cart">Open cart</string>
     <string name="label_add_to_cart">Add to cart</string>
     <string name="label_currency">R$ %1$s</string>
@@ -16,6 +17,7 @@
     <string name="label_loading">Loading</string>
     <string name="label_yes">Yes</string>
     <string name="label_no">No</string>
+    <string name="label_order_number">Order number:</string>
 
     <string name="error_empty_response">No items to show</string>
     <string name="error_generic">An error occurred. Please, try again.</string>

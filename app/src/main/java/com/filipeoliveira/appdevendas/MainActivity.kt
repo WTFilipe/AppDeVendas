@@ -14,6 +14,7 @@ import com.filipeoliveira.appdevendas.ui.components.SalesBottomNavigation
 import com.filipeoliveira.appdevendas.ui.screens.home.ScreenHome
 import com.filipeoliveira.appdevendas.ui.screens.Screens
 import com.filipeoliveira.appdevendas.ui.screens.cart.ScreenCart
+import com.filipeoliveira.appdevendas.ui.screens.orders.ScreenOrders
 import com.filipeoliveira.appdevendas.ui.theme.AppDeVendasTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +28,8 @@ class MainActivity : ComponentActivity() {
 
                 val screensInBottomNav = listOf(
                     Screens.Home,
-                    Screens.Cart
+                    Screens.Cart,
+                    Screens.Orders
                 )
 
                 Scaffold(
@@ -51,6 +53,7 @@ class MainActivity : ComponentActivity() {
                         )
                         }
                         composable(Screens.Cart.route) { ScreenCart() }
+                        composable(Screens.Orders.route) { ScreenOrders() }
                     }
                 }
             }

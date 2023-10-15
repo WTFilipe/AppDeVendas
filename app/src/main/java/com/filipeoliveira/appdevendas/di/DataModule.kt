@@ -14,6 +14,8 @@ import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCase
 import com.filipeoliveira.appdevendas.domain.GetAvailableItemListUseCaseImpl
 import com.filipeoliveira.appdevendas.domain.GetCartUseCase
 import com.filipeoliveira.appdevendas.domain.GetCartUseCaseImpl
+import com.filipeoliveira.appdevendas.domain.GetOrdersListUseCase
+import com.filipeoliveira.appdevendas.domain.GetOrdersListUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -36,4 +38,6 @@ abstract class DataModule {
     abstract fun providesAddToCartUseCase(addToCartUseCaseImpl: AddToCartUseCaseImpl) : AddToCartUseCase
     @Binds
     abstract fun providesFinishPurchaseUseCase(finishPurchaseUseCaseImpl: FinishPurchaseUseCaseImpl) : FinishPurchaseUseCase
+    @Binds
+    abstract fun providesGetOrdersListUseCase(getOrdersListUseCaseImpl: GetOrdersListUseCaseImpl) : GetOrdersListUseCase
 }

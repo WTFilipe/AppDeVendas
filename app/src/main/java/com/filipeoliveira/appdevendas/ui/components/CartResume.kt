@@ -71,9 +71,14 @@ private fun CartResumeLeft(
         Spacer(Modifier.height(dimen8Dp))
         Text(
             stringResource(
-                R.string.label_order_total_price,
+                R.string.label_order_total_price
+            )
+            + " "
+            + stringResource(
+                R.string.label_currency,
                 totalPrice.setScale(2, RoundingMode.UNNECESSARY)
-            ))
+            )
+        )
     }
 }
 @Composable

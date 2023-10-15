@@ -1,5 +1,6 @@
 package com.filipeoliveira.appdevendas.ui.screens.cart
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -39,7 +42,12 @@ import java.math.RoundingMode
 fun ScreenCart(
     modifier: Modifier = Modifier
 ){
-    ScreenContent(modifier)
+    Surface (
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.background)
+    ){
+        ScreenContent(modifier)
+    }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -105,7 +113,9 @@ private fun OnGetCartSuccess(
     ) {
         val items = orderWithItems.items
         items(items.size) {
-            CartItemLayout(items[it])
+            Card {
+                CartItemLayout(items[it])
+            }
             Spacer(modifier = Modifier.height(dimen8Dp))
         }
     }

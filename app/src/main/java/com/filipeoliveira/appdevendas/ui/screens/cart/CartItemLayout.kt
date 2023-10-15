@@ -3,17 +3,19 @@ package com.filipeoliveira.appdevendas.ui.screens.cart
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -22,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.filipeoliveira.appdevendas.R
 import com.filipeoliveira.appdevendas.data.model.OrderItem
-import com.filipeoliveira.appdevendas.ui.dimen100Dp
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen1dp
 import com.filipeoliveira.appdevendas.ui.dimen4Dp
@@ -33,32 +34,36 @@ import java.math.RoundingMode
 @Composable
 fun CartItemLayout(
     orderItem: OrderItem,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    showDescription: Boolean = false
 ) {
-    Card(
+    Column(
         modifier = modifier
+            .background(Color.Transparent)
     ) {
-        Column {
-            CartItemLayoutTop(modifier, orderItem)
-            Spacer(
-                modifier = Modifier
-                    .height(dimen1dp)
-                    .background(MaterialTheme.colorScheme.onSurface)
-                    .fillMaxWidth()
-            )
-            CartItemLayoutBottom(orderItem.totalValue)
-        }
+        CartItemLayoutTop(orderItem, modifier, showDescription)
+        Spacer(
+            modifier = Modifier
+                .height(dimen1dp)
+                .background(MaterialTheme.colorScheme.onSurface)
+                .fillMaxWidth()
+        )
+        CartItemLayoutBottom(orderItem.totalValue)
     }
 }
 
 @Composable
 private fun CartItemLayoutTop(
-    modifier: Modifier,
-    orderItem: OrderItem
+    orderItem: OrderItem,
+    modifier: Modifier = Modifier,
+    showDescription: Boolean
 ) {
-    Row(modifier = modifier) {
-        CartItemLayoutTopLeft(orderItem)
-        CartItemLayoutTopRight(orderItem)
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.height(IntrinsicSize.Max)
+    ) {
+        CartItemLayoutTopLeft(orderItem, modifier.weight(1F))
+        CartItemLayoutTopRight(orderItem, modifier.weight(2F), showDescription)
     }
 }
 
@@ -68,18 +73,22 @@ private fun CartItemLayoutTopLeft(orderItem: OrderItem, modifier: Modifier = Mod
     AsyncImage(
         model = orderItem.imageURL,
         contentDescription = null,
-        modifier = Modifier
-            .size(dimen100Dp),
+        modifier = modifier,
         error = painter,
-        contentScale = ContentScale.FillBounds,
+        contentScale = ContentScale.Fit,
     )
 }
 
 @Composable
-private fun CartItemLayoutTopRight(orderItem: OrderItem, modifier: Modifier = Modifier) {
+private fun CartItemLayoutTopRight(
+    orderItem: OrderItem,
+    modifier: Modifier = Modifier,
+    showDescription: Boolean
+) {
     Column(
         modifier = modifier
             .padding(start = dimen8Dp, end = dimen16Dp, top = dimen8Dp, bottom = dimen8Dp)
+            .background(Color.Transparent)
     ) {
         Text(
             text = orderItem.name,
@@ -88,7 +97,9 @@ private fun CartItemLayoutTopRight(orderItem: OrderItem, modifier: Modifier = Mo
             color = MaterialTheme.colorScheme.onSurface,
             fontWeight = FontWeight.Bold
         )
+
         Spacer(modifier = Modifier.height(dimen4Dp))
+
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
@@ -105,11 +116,13 @@ private fun CartItemLayoutTopRight(orderItem: OrderItem, modifier: Modifier = Mo
 
             )
         }
+
         Spacer(
             modifier = Modifier
                 .height(dimen4Dp)
                 .background(MaterialTheme.colorScheme.onSurfaceVariant)
         )
+
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
@@ -123,6 +136,16 @@ private fun CartItemLayoutTopRight(orderItem: OrderItem, modifier: Modifier = Mo
                 text = orderItem.quantityOfItems.toString(),
                 fontWeight = FontWeight.Light,
                 color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+
+        Spacer(modifier = Modifier.height(dimen8Dp))
+
+        if (showDescription){
+            Text(
+                text = orderItem.description,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurface
             )
         }
     }
@@ -162,5 +185,7 @@ fun CartItemLayoutPreview() {
         orderId = -1,
         valuePerItem = BigDecimal(307.74).setScale(2, RoundingMode.FLOOR)
     )
-    CartItemLayout(item)
+    Card{
+        CartItemLayout(item)
+    }
 }
