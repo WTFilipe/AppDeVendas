@@ -1,4 +1,4 @@
-package com.filipeoliveira.appdevendas.ui.components
+package com.filipeoliveira.appdevendas.ui.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

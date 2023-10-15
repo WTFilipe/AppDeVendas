@@ -20,8 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.filipeoliveira.appdevendas.data.model.AvailableItem
-import com.filipeoliveira.appdevendas.ui.components.CartResumeForHome
-import com.filipeoliveira.appdevendas.ui.components.ItemLayoutForList
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import java.math.BigDecimal
 

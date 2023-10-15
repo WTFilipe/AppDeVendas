@@ -1,4 +1,4 @@
-package com.filipeoliveira.appdevendas.ui.components
+package com.filipeoliveira.appdevendas.ui.screens.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -142,19 +142,20 @@ private fun ItemLayoutBottomRight(
 @Preview(name = "Layout for List", heightDp = 300)
 @Composable
 fun LayoutForDialogPreview() {
+    val item = AvailableItem(
+        name = "Carrinho de controle remoto",
+        description = "Carrinho controlado por controle sem fio via Wifi. " +
+                "Controle seu carrinho com até 50 metros de distância e alcance até 5 km/h",
+        value = BigDecimal.valueOf(307.74),
+        imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg",
+        sku = "1"
+    )
+
     ItemLayoutForDialog(
-        availableItem = availableItem,
+        availableItem = item,
         onAddItemClicked = {},
         onRemoveItemClicked = {},
         selectedQuantity = 0L
     )
 }
 
-private val availableItem = AvailableItem(
-    name = "Carrinho de controle remoto",
-    description = "Carrinho controlado por controle sem fio via Wifi. " +
-            "Controle seu carrinho com até 50 metros de distância e alcance até 5 km/h",
-    value = BigDecimal.valueOf(307.74),
-    imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg",
-    sku = "1"
-)
