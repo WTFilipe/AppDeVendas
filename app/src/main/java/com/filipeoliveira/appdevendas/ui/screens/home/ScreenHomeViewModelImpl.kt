@@ -16,21 +16,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModelImpl @Inject constructor(
+class ScreenHomeViewModelImpl @Inject constructor(
     private val getAvailableItemListUseCase: GetAvailableItemListUseCase,
     private val getCartUseCase: GetCartUseCase,
     private val addToCartUseCase: AddToCartUseCase,
-) : ViewModel(), HomeViewModel {
+) : ViewModel(), ScreenHomeViewModel {
 
-    private var _homeScreenModel = MutableStateFlow(
-        HomeScreenModel(
+    private var _ScreenHomeModel = MutableStateFlow(
+        ScreenHomeModel(
             isLoading = true,
             error = null,
             availableAvailableItemList = emptyList()
         )
     )
-    val homeScreenModel: StateFlow<HomeScreenModel>
-        get() = _homeScreenModel
+    val screenHomeModel: StateFlow<ScreenHomeModel>
+        get() = _ScreenHomeModel
 
     init {
         this.loadAvailableItems()
@@ -38,8 +38,8 @@ class HomeViewModelImpl @Inject constructor(
     }
 
     override fun loadAvailableItems() {
-        _homeScreenModel = MutableStateFlow(
-            HomeScreenModel(
+        _ScreenHomeModel = MutableStateFlow(
+            ScreenHomeModel(
                 isLoading = true,
                 error = null,
                 availableAvailableItemList = emptyList()
@@ -49,7 +49,7 @@ class HomeViewModelImpl @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             getAvailableItemListUseCase.execute()
                 .catch {
-                    _homeScreenModel.value = HomeScreenModel(
+                    _ScreenHomeModel.value = ScreenHomeModel(
                         isLoading = false,
                         error = it,
                         availableAvailableItemList = emptyList()
@@ -58,7 +58,7 @@ class HomeViewModelImpl @Inject constructor(
                 .collect { result ->
                     when (result) {
                         is Result.Success -> {
-                            _homeScreenModel.value = HomeScreenModel(
+                            _ScreenHomeModel.value = ScreenHomeModel(
                                 isLoading = false,
                                 error = null,
                                 availableAvailableItemList = result.data
@@ -66,7 +66,7 @@ class HomeViewModelImpl @Inject constructor(
                         }
 
                         is Result.Error -> {
-                            _homeScreenModel.value = HomeScreenModel(
+                            _ScreenHomeModel.value = ScreenHomeModel(
                                 isLoading = false,
                                 error = result.error,
                                 availableAvailableItemList = emptyList()
@@ -83,7 +83,7 @@ class HomeViewModelImpl @Inject constructor(
                 .catch {}
                 .collect { result ->
                     if (result is Result.Success){
-                        _homeScreenModel.value = _homeScreenModel.value.copy(
+                        _ScreenHomeModel.value = _ScreenHomeModel.value.copy(
                             cart = result.data
                         )
                     }

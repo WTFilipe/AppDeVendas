@@ -2,11 +2,20 @@
     <string name="app_name">App de Vendas</string>
 
     <string name="title_home">Home</string>
+    <string name="title_cart">Cart</string>
 
     <string name="label_order_items_quantity">Items in this Order: %1$s</string>
     <string name="label_order_total_price">Total price: R$%1$s</string>
     <string name="label_open_cart">Open cart</string>
     <string name="label_add_to_cart">Add to cart</string>
-    <string name="label_currency">R$%1$s</string>
+    <string name="label_currency">R$ %1$s</string>
+    <string name="label_value_per_unit">Value per unit:</string>
+    <string name="label_quantity">Quantity:</string>
+    <string name="label_item_total_value">Total for this item:</string>
+    <string name="label_finish_purchase">Finish purchase</string>
+    <string name="label_loading">Loading</string>
+
+    <string name="error_empty_response">No items to show</string>
+    <string name="error_generic">An error occurred. Please, try again.</string>
 
 </resources>

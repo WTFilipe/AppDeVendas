@@ -52,5 +52,14 @@ fun ItemDetailDialog(
 @Preview(heightDp = 350)
 @Composable
 fun ItemDetailDialogPreview() {
-    ItemDetailDialog(availableItem, { _, _ -> })
+    val item = AvailableItem(
+        name = "Carrinho de controle remoto",
+        description = "Carrinho controlado por controle sem fio via Wifi. " +
+                "Controle seu carrinho com até 50 metros de distância e alcance até 5 km/h",
+        value = BigDecimal.valueOf(307.74),
+        imageURL = "https://m.media-amazon.com/images/I/61CYnxI+WnL._AC_SX522_.jpg",
+        sku = "1"
+    )
+
+    ItemDetailDialog(item, { _, _ -> })
 }

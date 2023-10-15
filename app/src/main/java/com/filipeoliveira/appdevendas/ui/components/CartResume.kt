@@ -1,4 +1,4 @@
-package com.filipeoliveira.appdevendas.ui.screens.home
+package com.filipeoliveira.appdevendas.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -27,9 +27,11 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 
 @Composable
-fun CartResumeForHome(
+fun CartResume(
     itemQuantity: Long,
     totalPrice: BigDecimal,
+    buttonText: String,
+    onButtonClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -46,7 +48,8 @@ fun CartResumeForHome(
                 .weight(1F)
         )
         CartResumeRight(
-            {},
+            buttonText,
+            { onButtonClick() },
             Modifier
                 .fillMaxHeight()
                 .weight(1F)
@@ -74,20 +77,20 @@ private fun CartResumeLeft(
     }
 }
 @Composable
-private fun CartResumeRight(onButtonClick: () -> Unit, modifier: Modifier = Modifier) {
+private fun CartResumeRight(buttonText: String, onButtonClick: () -> Unit, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.End
     ) {
         Button(
-            onClick = { onButtonClick () },
+            onClick = { onButtonClick() },
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.surfaceVariant
             )
         ){
             Text(
-                text = stringResource(R.string.label_open_cart),
+                text = buttonText,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
@@ -97,7 +100,7 @@ private fun CartResumeRight(onButtonClick: () -> Unit, modifier: Modifier = Modi
 @Preview (heightDp = 75)
 @Composable
 fun CartResumeForHomePreview(){
-    CartResumeForHome(
-        10L, BigDecimal(99.99)
+    CartResume(
+        10L, BigDecimal(99.99), "Add to Cart", {}
     )
 }

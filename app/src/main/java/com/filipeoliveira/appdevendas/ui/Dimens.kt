@@ -14,5 +14,5 @@ val dimen24Dp = 24.dp
 val dimen30Dp = 30.dp
 val dimen36Dp = 36.dp
 val dimen42Dp = 42.dp
-val dimen50Dp = 50.dp
+val dimen100Dp = 100.dp
 val dimen150Dp = 150.dp

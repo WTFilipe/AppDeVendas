@@ -1,6 +1,7 @@
 package com.filipeoliveira.appdevendas.ui.screens.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -17,32 +18,42 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.filipeoliveira.appdevendas.R
 import com.filipeoliveira.appdevendas.data.model.AvailableItem
+import com.filipeoliveira.appdevendas.ui.components.CartResume
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import java.math.BigDecimal
 
 @Composable
-fun HomeScreen(
+fun ScreenHome(
+    onGoToCartClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Surface(
         modifier
             .background(MaterialTheme.colorScheme.background)
     ) {
-        ScreenContent()
+        ScreenContent(
+            onGoToCartClicked = { onGoToCartClicked()}
+        )
     }
 }
 
 @Composable
 private fun ScreenContent(
+    onGoToCartClicked: () -> Unit,
     modifier: Modifier = Modifier,
-    homeViewModel: HomeViewModelImpl = hiltViewModel()
+    homeViewModel: ScreenHomeViewModelImpl = hiltViewModel()
 ) {
-    val uiState = homeViewModel.homeScreenModel.collectAsState().value
+    val uiState = homeViewModel.screenHomeModel.collectAsState().value
 
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(
+        verticalArrangement = Arrangement.SpaceBetween,
+        modifier = modifier.fillMaxSize()
+    ) {
 
         if (uiState.availableAvailableItemList.isNotEmpty()) {
             OnAvailableItemsSuccess(
@@ -57,9 +68,13 @@ private fun ScreenContent(
         }
 
         if (uiState.cartSize > 0){
-            CartResumeForHome(
-                uiState.cartSize,
-                uiState.cartValue
+            CartResume(
+                itemQuantity = uiState.cartSize,
+                totalPrice = uiState.cartValue,
+                buttonText = stringResource(R.string.label_open_cart),
+                onButtonClick = {
+                    onGoToCartClicked()
+                }
             )
         }
     }
@@ -67,7 +82,7 @@ private fun ScreenContent(
 
 @Composable
 fun OnAvailableItemsSuccess(
-    data: HomeScreenModel,
+    data: ScreenHomeModel,
     onAddToCart: (AvailableItem, Long) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -124,6 +139,6 @@ fun OnAvailableItemsSuccessPreview() {
         )
     }
 
-    val homeScreenModel = HomeScreenModel(availableAvailableItemList = fakeList)
-    OnAvailableItemsSuccess(data = homeScreenModel, onAddToCart = {_,_ -> })
+    val screenHomeModel = ScreenHomeModel(availableAvailableItemList = fakeList)
+    OnAvailableItemsSuccess(data = screenHomeModel, onAddToCart = { _, _ -> })
 }

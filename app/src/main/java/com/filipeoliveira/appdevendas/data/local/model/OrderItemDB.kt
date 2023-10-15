@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.filipeoliveira.appdevendas.data.model.OrderItem
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 @Entity
 data class OrderItemDB(
@@ -25,7 +26,7 @@ data class OrderItemDB(
         name = name,
         description = description,
         imageURL = imageURL,
-        valuePerItem = BigDecimal(valuePerItem),
+        valuePerItem = BigDecimal(valuePerItem).setScale(2, RoundingMode.FLOOR),
         orderId = orderId
     )
 }

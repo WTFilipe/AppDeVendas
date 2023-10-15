@@ -2,6 +2,7 @@ package com.filipeoliveira.appdevendas.domain
 
 import com.filipeoliveira.appdevendas.data.SalesRepository
 import com.filipeoliveira.appdevendas.data.model.OrderWithItems
+import com.filipeoliveira.appdevendas.domain.errors.EmptyResponseError
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -16,7 +17,11 @@ class GetCartUseCaseImpl @Inject constructor (
                 emit(Result.Error(it))
             }
             .collect{
-                emit(Result.Success(it))
+                if (it.items.isNotEmpty()){
+                    emit(Result.Success(it))
+                } else {
+                    emit(Result.Error(EmptyResponseError()))
+                }
             }
     }
 }

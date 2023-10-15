@@ -2,11 +2,9 @@ package com.filipeoliveira.appdevendas.ui.screens.home
 
 import com.filipeoliveira.appdevendas.data.model.AvailableItem
 import com.filipeoliveira.appdevendas.data.model.Order
-import com.filipeoliveira.appdevendas.data.model.OrderItem
 import com.filipeoliveira.appdevendas.data.model.OrderWithItems
-import java.math.BigDecimal
 
-data class HomeScreenModel(
+data class ScreenHomeModel(
     val isLoading: Boolean = false,
     val availableAvailableItemList: List<AvailableItem> = emptyList(),
     val error: Throwable? = null,
