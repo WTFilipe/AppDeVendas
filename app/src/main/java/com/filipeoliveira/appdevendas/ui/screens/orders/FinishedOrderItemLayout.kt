@@ -11,7 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -61,7 +62,8 @@ fun FinishedOrderItemLayout(
                 orderWithItems = orderWithItems,
                 onArrowClicked = {
                     showFullContent = !showFullContent
-                }
+                },
+                showFullContent = showFullContent
             )
             if (showFullContent){
                 Spacer(modifier = Modifier.height(dimen8Dp))
@@ -76,20 +78,22 @@ fun FinishedOrderItemLayout(
 private fun FinishedOrderItemLayoutTop(
     orderWithItems: OrderWithItems,
     onArrowClicked: () -> Unit,
+    showFullContent: Boolean,
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier
-        .padding(bottom = dimen12Dp)) {
+        .padding(bottom = dimen12Dp)
+        .clickable {
+            onArrowClicked()
+        }
+    ) {
         Row(
             horizontalArrangement = Arrangement.End,
             modifier = Modifier.fillMaxWidth()
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowDropDown,
+                imageVector = if (showFullContent) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                 contentDescription = null,
-                modifier = Modifier.clickable {
-                    onArrowClicked()
-                }
             )
         }
 
