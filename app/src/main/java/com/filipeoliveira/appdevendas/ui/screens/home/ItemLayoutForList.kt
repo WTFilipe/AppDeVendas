@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -18,7 +17,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -31,7 +29,6 @@ import coil.compose.AsyncImage
 import com.filipeoliveira.appdevendas.R
 import com.filipeoliveira.appdevendas.data.model.AvailableItem
 import com.filipeoliveira.appdevendas.ui.dimen150Dp
-import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen20Dp
 import com.filipeoliveira.appdevendas.ui.dimen8Dp
 import com.filipeoliveira.appdevendas.ui.forwardingPainter
@@ -41,8 +38,7 @@ import java.math.BigDecimal
 fun ItemLayoutForList(
     availableItem: AvailableItem,
     modifier: Modifier = Modifier,
-    onItemClicked: ((AvailableItem) -> Unit),
-    onAddToCardClicked: ((AvailableItem) -> Unit),
+    onItemClicked: ((AvailableItem) -> Unit)
 ) {
     Card(
         modifier
@@ -54,17 +50,7 @@ fun ItemLayoutForList(
             defaultElevation = dimen8Dp
         )
     ) {
-        Column(
-            modifier = Modifier,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            ItemLayoutTop(availableItem, titleMaxLines = 2, subtitleMaxLines = 2)
-            ItemLayoutBottom(modifier = modifier, onAddToCartClicked = {
-                onAddToCardClicked(
-                    availableItem
-                )
-            })
-        }
+        ItemLayoutTop(availableItem, titleMaxLines = 2, subtitleMaxLines = 2)
     }
 }
 
@@ -144,35 +130,10 @@ fun ItemLayoutTopRight(
     }
 }
 
-@Composable
-fun ItemLayoutBottom(
-    modifier: Modifier = Modifier,
-    onAddToCartClicked: (() -> Unit)? = null) {
-    Row(
-        modifier = modifier
-            .fillMaxSize()
-            .clickable {
-                onAddToCartClicked?.let { it() }
-            },
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = stringResource(R.string.label_add_to_cart),
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(vertical = dimen16Dp)
-        )
-
-    }
-
-}
-
-@Preview(name = "Layout for List", heightDp = 300)
+@Preview(name = "Layout for List")
 @Composable
 fun LayoutForListPreview() {
-    ItemLayoutForList(availableItem = availableItem, onItemClicked = {}, onAddToCardClicked =  {})
+    ItemLayoutForList(availableItem = availableItem, onItemClicked = {})
 }
 
 private val availableItem = AvailableItem(

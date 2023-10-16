@@ -112,9 +112,6 @@ fun OnAvailableItemsSuccess(
                 availableItem = availableItems[it],
                 onItemClicked = { item ->
                     showDetailDialog = item
-                },
-                onAddToCardClicked = { item ->
-                    onAddToCart(item, 1)
                 }
             )
             if (it != availableItems.size - 1){
