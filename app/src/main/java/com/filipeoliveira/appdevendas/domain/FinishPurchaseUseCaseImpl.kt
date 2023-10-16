@@ -8,6 +8,6 @@ class FinishPurchaseUseCaseImpl @Inject constructor (
     private val salesRepository: SalesRepository
 ) : FinishPurchaseUseCase{
     override suspend fun execute(orderWithItems: OrderWithItems)  {
-        salesRepository.addToCart(orderWithItems)
+        salesRepository.finishPurchase(orderWithItems)
     }
 }

@@ -71,7 +71,6 @@ class ScreenCartViewModelImpl @Inject constructor(
                 }
         }
     }
-
     override fun finishPurchase(orderWithItems: OrderWithItems) {
         viewModelScope.launch(Dispatchers.IO) {
             finishPurchaseUseCase.execute(orderWithItems)

@@ -40,7 +40,7 @@ class SalesRepositoryImpl @Inject constructor (
         localData.addToCart(availableItem.toOrderItemDB(selectedQuantity))
     }
 
-    override suspend fun addToCart(orderWithItems: OrderWithItems) {
+    override suspend fun finishPurchase(orderWithItems: OrderWithItems) {
         localData.finishPurchase(orderWithItems.toOrderWithItemsDB())
     }
 

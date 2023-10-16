@@ -47,10 +47,15 @@ fun CartItemLayout(
         Spacer(
             modifier = Modifier
                 .height(dimen1dp)
-                .background(MaterialTheme.colorScheme.onSurface)
                 .fillMaxWidth()
         )
         CartItemLayoutBottom(orderItem.totalValue)
+        Spacer(
+            modifier = Modifier
+                .height(dimen1dp)
+                .background(MaterialTheme.colorScheme.onSurface)
+                .fillMaxWidth()
+        )
     }
 }
 

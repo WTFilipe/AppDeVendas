@@ -9,5 +9,5 @@ interface SalesRepository {
     suspend fun getOrderList() : Flow<List<OrderWithItems>>
     suspend fun getCart() : Flow<OrderWithItems>
     suspend fun addToCart(availableItem: AvailableItem, selectedQuantity: Long)
-    suspend fun addToCart(orderWithItems: OrderWithItems)
+    suspend fun finishPurchase(orderWithItems: OrderWithItems)
 }

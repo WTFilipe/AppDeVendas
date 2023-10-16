@@ -1,7 +1,6 @@
 package com.filipeoliveira.appdevendas.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -23,8 +22,8 @@ interface OrderWithItemsDAO {
     fun insertOrder(orderDB: OrderDB)
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertOrderItem(orderItemDB: OrderItemDB)
-    @Delete
-    fun deleteOrderItem(orderItemDB: OrderItemDB)
+    @Query("DELETE FROM OrderItemDB WHERE orderId == -1 AND sku == :sku")
+    fun deleteCartItem(sku: String)
     @Query("DELETE FROM OrderItemDB WHERE orderId == -1")
     fun deleteCart()
 }

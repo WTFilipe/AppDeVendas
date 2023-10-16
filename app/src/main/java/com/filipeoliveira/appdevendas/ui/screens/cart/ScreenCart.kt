@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -50,7 +49,6 @@ fun ScreenCart(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ScreenContent(
     modifier: Modifier = Modifier,
@@ -78,7 +76,7 @@ private fun ScreenContent(
         }
 
         if (cartItems.isNotEmpty()){
-            OnGetCartSuccess(uiState.cart, modifier)
+            OnGetCartSuccess(uiState.cart, modifier.weight(1F))
             CartResume(
                 itemQuantity = uiState.cart.quantityOfItems,
                 totalPrice = uiState.cart.orderValue,

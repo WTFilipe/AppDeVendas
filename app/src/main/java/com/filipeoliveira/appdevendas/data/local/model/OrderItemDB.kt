@@ -9,7 +9,8 @@ import java.math.RoundingMode
 
 @Entity
 data class OrderItemDB(
-    @PrimaryKey val sku: String,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    @ColumnInfo val sku: String,
     @ColumnInfo val quantityOfItems: Long,
     @ColumnInfo val name: String,
     @ColumnInfo val description: String,

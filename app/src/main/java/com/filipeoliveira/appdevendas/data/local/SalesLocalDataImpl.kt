@@ -16,7 +16,7 @@ class SalesLocalDataImpl @Inject constructor (
             appDatabase.getOrderWithItemsDao().insertOrderItem(item)
             appDatabase.getOrderWithItemsDao().insertOrder(OrderDB(orderId = OrderDB.CART_ORDER_ID, isStillInCart = true))
         } else {
-            appDatabase.getOrderWithItemsDao().deleteOrderItem(item)
+            appDatabase.getOrderWithItemsDao().deleteCartItem(item.sku)
         }
     }
 
