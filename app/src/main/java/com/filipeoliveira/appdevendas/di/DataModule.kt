@@ -2,8 +2,8 @@ package com.filipeoliveira.appdevendas.di
 
 import com.filipeoliveira.data.repository.SalesRepository
 import com.filipeoliveira.data.repository.SalesRepositoryImpl
-import com.filipeoliveira.appdevendas.data.local.SalesLocalData
-import com.filipeoliveira.appdevendas.data.local.SalesLocalDataImpl
+import com.filipeoliveira.data.local.SalesLocalData
+import com.filipeoliveira.data.local.SalesLocalDataImpl
 import com.filipeoliveira.appdevendas.data.remote.SalesRemoteData
 import com.filipeoliveira.appdevendas.data.remote.SalesRemoteDataImpl
 import com.filipeoliveira.domain.AddToCartUseCase

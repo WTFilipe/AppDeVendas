@@ -2,7 +2,7 @@ package com.filipeoliveira.appdevendas.di
 
 import android.content.Context
 import androidx.room.Room
-import com.filipeoliveira.appdevendas.data.local.AppDatabase
+import com.filipeoliveira.data.local.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

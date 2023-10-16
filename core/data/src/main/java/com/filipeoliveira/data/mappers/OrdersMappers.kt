@@ -7,5 +7,5 @@ object OrdersMappers {
 
     fun OrderDB.toOrder() = Order(orderId = orderId)
 
-    fun Order.toOrderDB() = OrderDB(orderId = orderId, isStillInCart = false)
+    fun Order.toOrderDB() = OrderDB(orderId = orderId)
 }
