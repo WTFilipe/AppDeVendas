@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -28,6 +29,7 @@ import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen1dp
 import com.filipeoliveira.appdevendas.ui.dimen4Dp
 import com.filipeoliveira.appdevendas.ui.dimen8Dp
+import com.filipeoliveira.appdevendas.ui.forwardingPainter
 import java.math.BigDecimal
 import java.math.RoundingMode
 
@@ -69,7 +71,10 @@ private fun CartItemLayoutTop(
 
 @Composable
 private fun CartItemLayoutTopLeft(orderItem: OrderItem, modifier: Modifier = Modifier) {
-    val painter = painterResource(R.drawable.ic_android_24dp)
+    val painter = forwardingPainter(
+        painter = painterResource(R.drawable.ic_android_24dp),
+        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
+    )
     AsyncImage(
         model = orderItem.imageURL,
         contentDescription = null,
