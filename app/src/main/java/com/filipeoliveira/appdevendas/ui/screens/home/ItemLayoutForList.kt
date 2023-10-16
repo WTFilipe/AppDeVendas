@@ -17,6 +17,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -65,6 +66,7 @@ fun ItemLayoutTop(
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface)
             .height(IntrinsicSize.Min),
+        verticalAlignment = Alignment.CenterVertically
     ) {
         ItemLayoutTopLeft(availableItem)
         ItemLayoutTopRight(
@@ -87,7 +89,7 @@ fun ItemLayoutTopLeft(availableItem: AvailableItem) {
             painter = painterResource(R.drawable.ic_android_24dp),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurface)
         ),
-        contentScale = ContentScale.FillBounds,
+        contentScale = ContentScale.Fit,
     )
 }
 
