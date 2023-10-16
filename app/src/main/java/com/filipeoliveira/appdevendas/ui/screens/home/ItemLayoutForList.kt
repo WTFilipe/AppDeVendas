@@ -28,7 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.filipeoliveira.appdevendas.R
-import com.filipeoliveira.appdevendas.data.model.AvailableItem
+import com.filipeoliveira.domain.model.AvailableItem
 import com.filipeoliveira.appdevendas.ui.dimen150Dp
 import com.filipeoliveira.appdevendas.ui.dimen20Dp
 import com.filipeoliveira.appdevendas.ui.dimen8Dp

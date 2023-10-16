@@ -2,8 +2,8 @@ package com.filipeoliveira.appdevendas.ui.screens.orders
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.filipeoliveira.appdevendas.domain.GetOrdersListUseCase
-import com.filipeoliveira.appdevendas.domain.Result
+import com.filipeoliveira.domain.GetOrdersListUseCase
+import com.filipeoliveira.domain.model.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

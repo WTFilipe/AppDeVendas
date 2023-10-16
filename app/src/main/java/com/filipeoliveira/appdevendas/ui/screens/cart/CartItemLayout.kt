@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.filipeoliveira.appdevendas.R
-import com.filipeoliveira.appdevendas.data.model.OrderItem
+import com.filipeoliveira.domain.model.OrderItem
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen1dp
 import com.filipeoliveira.appdevendas.ui.dimen4Dp

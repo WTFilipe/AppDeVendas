@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.filipeoliveira.appdevendas.data.model.AvailableItem
+import com.filipeoliveira.domain.model.AvailableItem
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import com.filipeoliveira.appdevendas.ui.dimen8Dp
 import java.math.BigDecimal

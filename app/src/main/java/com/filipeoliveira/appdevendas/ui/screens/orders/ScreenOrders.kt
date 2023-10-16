@@ -18,10 +18,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.filipeoliveira.appdevendas.R
-import com.filipeoliveira.appdevendas.data.model.Order
-import com.filipeoliveira.appdevendas.data.model.OrderItem
-import com.filipeoliveira.appdevendas.data.model.OrderWithItems
-import com.filipeoliveira.appdevendas.domain.errors.EmptyResponseError
+import com.filipeoliveira.domain.model.Order
+import com.filipeoliveira.domain.model.OrderItem
+import com.filipeoliveira.domain.model.OrderWithItems
+import com.filipeoliveira.domain.errors.EmptyResponseError
 import com.filipeoliveira.appdevendas.ui.components.Loading
 import com.filipeoliveira.appdevendas.ui.dimen16Dp
 import java.math.BigDecimal

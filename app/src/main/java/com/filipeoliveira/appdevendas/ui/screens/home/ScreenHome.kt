@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.filipeoliveira.appdevendas.R
-import com.filipeoliveira.appdevendas.data.model.AvailableItem
-import com.filipeoliveira.appdevendas.domain.errors.EmptyResponseError
+import com.filipeoliveira.domain.model.AvailableItem
+import com.filipeoliveira.domain.errors.EmptyResponseError
 import com.filipeoliveira.appdevendas.ui.components.CartResume
 import com.filipeoliveira.appdevendas.ui.components.Loading
 import com.filipeoliveira.appdevendas.ui.dimen16Dp

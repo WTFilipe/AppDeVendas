@@ -1,8 +1,8 @@
 package com.filipeoliveira.appdevendas.ui.screens.home
 
-import com.filipeoliveira.appdevendas.data.model.AvailableItem
-import com.filipeoliveira.appdevendas.data.model.Order
-import com.filipeoliveira.appdevendas.data.model.OrderWithItems
+import com.filipeoliveira.domain.model.AvailableItem
+import com.filipeoliveira.domain.model.Order
+import com.filipeoliveira.domain.model.OrderWithItems
 
 data class ScreenHomeModel(
     val isLoading: Boolean = false,

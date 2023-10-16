@@ -2,11 +2,11 @@ package com.filipeoliveira.appdevendas.ui.screens.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.filipeoliveira.appdevendas.data.model.Order
-import com.filipeoliveira.appdevendas.data.model.OrderWithItems
-import com.filipeoliveira.appdevendas.domain.FinishPurchaseUseCase
-import com.filipeoliveira.appdevendas.domain.GetCartUseCase
-import com.filipeoliveira.appdevendas.domain.Result
+import com.filipeoliveira.domain.model.Order
+import com.filipeoliveira.domain.model.OrderWithItems
+import com.filipeoliveira.domain.FinishPurchaseUseCase
+import com.filipeoliveira.domain.GetCartUseCase
+import com.filipeoliveira.domain.model.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
