@@ -68,7 +68,7 @@ private fun ScreenContent(
         val cartItems = uiState.cart.items
 
         if (uiState.isLoading){
-            Loading()
+            Loading(modifier.fillMaxSize())
         }
 
         if (uiState.error != null){

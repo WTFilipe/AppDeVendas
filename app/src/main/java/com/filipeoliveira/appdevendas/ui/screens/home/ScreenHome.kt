@@ -61,7 +61,7 @@ private fun ScreenContent(
     ) {
         when {
             uiState.isLoading -> {
-                Loading()
+                Loading(modifier.fillMaxSize())
             }
             uiState.error != null ->{
                 OnError(uiState.error)
