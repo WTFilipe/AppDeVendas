@@ -19,9 +19,16 @@ inicialmente, em um item colapsado. Basta tocar em um item pare ver mais informa
 - Arquitetura MVVM + Clean Architecture
 - Jetpack Compose - Desenvolvimento da UI
 - Navigation - Para navegação entre as telas
+- Kotlin KTS - Gerenciamento de dependências
+- Suporte ao "Modo Escuro"
+
+![image](https://github.com/WTFilipe/AppDeVendas/assets/32869667/0687d0df-aa44-4a66-95c7-608d84688f1c)
+![image](https://github.com/WTFilipe/AppDeVendas/assets/32869667/c26926c3-bc79-43d9-9ffe-3298dd89b453)
+![image](https://github.com/WTFilipe/AppDeVendas/assets/32869667/a3ce883e-158e-4201-b63c-50669dd9e749)
+
 
 ## Observações
-- A aplicação foi pensada para usar os conceitos de temas dinâmicos do Material 3. Por conta disso, as cores do aplicativo podem ser diferentes das cores exibidas na captura de tela, pois serão baseadas na cor do papel de parede do dispositivo. Qualquer que sejam as cores, a hierarquia de cores, visibilidade e contraste estão garantidos. Caso o projeto seja executado em um dispositivo que não ofereça suporte ao Material 3, um tema padrão (cores próximas ao azul e amarelo) será apresentado
+- A aplicação foi pensada para usar os conceitos de temas dinâmicos do Material 3. Por conta disso, as cores do aplicativo podem ser diferentes das cores exibidas na captura de tela, pois serão baseadas na cor do papel de parede do dispositivo. Quaisquer que sejam as cores, a hierarquia de cores, visibilidade e contraste estão garantidos. Caso o projeto seja executado em um dispositivo que não ofereça suporte ao Material 3, um tema padrão (cores próximas ao azul e amarelo) será apresentado
 
 
 ## Execução
