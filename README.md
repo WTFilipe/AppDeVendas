@@ -1,7 +1,6 @@
 # AppDeVendas
 
-O aplicativo App de Vendas simula um app simples para e-commerce. No App de Vendas está disponivel uma listagem de produtos (listagem mockada localmente, não conheço uma API que forneça dados de produtos da forma necessária. Porém, caso exista, 
-a lógica para receber dados da internet está completamente isolada em um "Remote Data", sendo fácil adicionar uma lib para requests (Como o Retrofit API) e passar a receber dados verdadeiros de uma API.
+O aplicativo App de Vendas simula um app simples para e-commerce. No App de Vendas está disponivel uma listagem de produtos.
 
 Na tela inicial do aplicativo você encontrará a listagem de produtos disponíveis, sendo possível clicar em um produto para abrir mais detalhes e adicionar 1 ou mais produtos daquele tipo no carrinho. Ao adicionar itens no carrinho, uma pequena view irá 
 aparecer no canto inferior da tela com o resumo (quantidade de itens e preço total) da compra. Ao lado será apresentado um botão para que o usuário possa ir para o carrinhho.
